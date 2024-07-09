@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="content-recommendation">
+  <br>
+  <div class="rekomendasi-title">
+      Rekomendasi Buku dari Kami untukmu
+  </div>
+  <!-- card book -->
+  <div class="card-container">
+    <!-- Card 1 -->
+    <div class="cardbaru">
+      <div class="kover-buku">
+        <img src="{{ url_for('static', filename='images/1.jpg') }}" alt="Book Cover" class="card-image">
+        <div class="detail-buku">
+          <h4><b>Buku Pemrograman</b></h4>
+          <p>HTML, CSS dan JavaScript</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Card 2 -->
+    <div class="cardbaru">
+      <div class="kover-buku">
+        <img src="{{ url_for('static', filename='images/1.jpg') }}" alt="Book Cover" class="card-image">
+        <div class="detail-buku">
+          <h4><b>Buku Desain Grafis</b></h4>
+          <p>Photoshop, Illustrator, InDesign</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Card 3 -->
+    <div class="cardbaru">
+      <div class="kover-buku">
+        <img src="{{ url_for('static', filename='images/1.jpg') }}" alt="Book Cover" class="card-image">
+        <div class="detail-buku">
+          <h4><b>Buku Pemasaran Digital</b></h4>
+          <p>SEO, Social Media, Content Marketing</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cardbaru">
+      <div class="kover-buku">
+        <img src="{{ url_for('static', filename='images/1.jpg') }}" alt="Book Cover" class="card-image">
+        <div class="detail-buku">
+          <h4><b>Buku Pemrograman</b></h4>
+          <p>HTML, CSS dan JavaScript</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cardbaru">
+      <div class="kover-buku">
+        <img src="{{ url_for('static', filename='images/1.jpg') }}" alt="Book Cover" class="card-image">
+        <div class="detail-buku">
+          <h4><b>Buku Pemrograman</b></h4>
+          <p>HTML, CSS dan JavaScript</p>
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+
+<div id="content-warning" hidden>
+  <br>
+  <br>
+  <div class="container-fluid d-flex justify-content-center align-items-center">
+    <h1 class="text-center">Anda Belum Login, silahkan Login</h1>
+  </div>
+
+</div>
+
+
+<!-- card book end -->
+
+{% endblock %}
+
+{% block script %}
+<script>
+  document.getElementById("menu-beranda").classList.remove("active");
+  document.getElementById("menu-rekomendasi").classList.add("active");
+  document.getElementById("menu-peminjaman").classList.remove("active");
+  // document.getElementById("menu-pengembalian").classList.remove("active");
+  document.getElementById("menu-registrasi").classList.remove("active");
+  
+  user_name = sessionStorage.getItem("user_name")
+  console.log(user_name)
+  if(user_name==null){
+    document.getElementById("content-recommendation").hidden = true
+    document.getElementById("content-warning").hidden = false
+  }
+  else{
+    document.getElementById("content-recommendation").hidden = false
+    document.getElementById("content-warning").hidden = true
+  }
+</script>
+{% endblock %}

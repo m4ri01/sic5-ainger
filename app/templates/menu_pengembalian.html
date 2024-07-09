@@ -1,0 +1,18 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="head1c">  
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+  document.getElementById("menu-beranda").classList.remove("active");
+  document.getElementById("menu-rekomendasi").classList.remove("active");
+  document.getElementById("menu-peminjaman").classList.remove("active");
+  // document.getElementById("menu-pengembalian").classList.add("active");
+  document.getElementById("menu-registrasi").classList.remove("active");
+  
+</script>
+{% endblock %}

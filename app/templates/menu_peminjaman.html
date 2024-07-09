@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div id="content-loan">
+<br>
+<br>
+<h3 style="text-align: center;">halo Zero, selamat datang di Menu Peminjaman </h3>
+<br>
+<div class="table-container" style="text-align: center;">
+     <h2>Daftar Peminjaman Buku</h2>
+     <table border="3" cellpadding="2" style="margin-left:auto;margin-right:auto">
+         <thead>
+             <tr>
+                 <th>No</th>
+                 <th>Judul Buku</th>
+                 <th>Tanggal Peminjaman</th>
+                 <th>Tanggal Kembali</th>
+             </tr>
+         </thead>
+         <tbody>
+             <tr>
+                 <td>1</td>
+                 <td>Belajar HTML dan CSS</td>
+                 <td>01/01/2024</td>
+                 <td>08/01/2024</td>
+             </tr>
+             <tr>
+                 <td>2</td>
+                 <td>JavaScript untuk Pemula</td>
+                 <td>02/01/2024</td>
+                 <td>09/01/2024</td>
+             </tr>
+             <tr>
+                 <td>3</td>
+                 <td>Pemrograman Python</td>
+                 <td>03/01/2024</td>
+                 <td>10/01/2024</td>
+             </tr>
+         </tbody>
+     </table>
+<!-- tombol scan -->
+    <button class="tombol-scan" style="text-align: center;">Scan</button>
+<!-- tombol scan end -->
+ </div>
+</div>
+
+ <div id="content-warning" hidden>
+  <br>
+  <br>
+  <div class="container-fluid d-flex justify-content-center align-items-center">
+    <h1 class="text-center">Anda Belum Login, silahkan Login</h1>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+  document.getElementById("menu-beranda").classList.remove("active");
+  document.getElementById("menu-rekomendasi").classList.remove("active");
+  document.getElementById("menu-peminjaman").classList.add("active");
+  // document.getElementById("menu-pengembalian").classList.remove("active");
+  document.getElementById("menu-registrasi").classList.remove("active");
+
+  user_name = sessionStorage.getItem("user_name")
+  if(user_name==null){
+    document.getElementById("content-loan").hidden = true
+    document.getElementById("content-warning").hidden = false
+  }
+  else{
+    document.getElementById("content-loan").hidden = false
+    document.getElementById("content-warning").hidden = true
+  }
+</script>
+{% endblock %}

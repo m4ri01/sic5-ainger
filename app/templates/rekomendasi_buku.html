@@ -4,62 +4,29 @@
 <div id="content-recommendation">
   <br>
   <div class="rekomendasi-title">
-      Rekomendasi Buku dari Kami untukmu
+      Buku Populer Kami
   </div>
   <!-- card book -->
   <div class="card-container">
-    <!-- Card 1 -->
-    <div class="cardbaru">
-      <div class="kover-buku">
-        <img src="{{ url_for('static', filename='images/1.jpg') }}" alt="Book Cover" class="card-image">
-        <div class="detail-buku">
-          <h4><b>Buku Pemrograman</b></h4>
-          <p>HTML, CSS dan JavaScript</p>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Card 2 -->
-    <div class="cardbaru">
-      <div class="kover-buku">
-        <img src="{{ url_for('static', filename='images/1.jpg') }}" alt="Book Cover" class="card-image">
-        <div class="detail-buku">
-          <h4><b>Buku Desain Grafis</b></h4>
-          <p>Photoshop, Illustrator, InDesign</p>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Card 3 -->
-    <div class="cardbaru">
-      <div class="kover-buku">
-        <img src="{{ url_for('static', filename='images/1.jpg') }}" alt="Book Cover" class="card-image">
-        <div class="detail-buku">
-          <h4><b>Buku Pemasaran Digital</b></h4>
-          <p>SEO, Social Media, Content Marketing</p>
-        </div>
-      </div>
-    </div>
 
+    {% for book in books %}
     <div class="cardbaru">
       <div class="kover-buku">
-        <img src="{{ url_for('static', filename='images/1.jpg') }}" alt="Book Cover" class="card-image">
+        <img src="{{book.image_url}}" alt="Book Cover" class="card-image">
         <div class="detail-buku">
-          <h4><b>Buku Pemrograman</b></h4>
-          <p>HTML, CSS dan JavaScript</p>
+          <h4><b>{{book.title}}</b></h4>
+          <p>{{book.author}}</p>
+          <p>{{book.publisher}}</p>
+          <p>{{book.year}}</p>
+          <p>{{book.ISBN}}</p>
         </div>
       </div>
     </div>
+    {% endfor %}
+</div>
 
-    <div class="cardbaru">
-      <div class="kover-buku">
-        <img src="{{ url_for('static', filename='images/1.jpg') }}" alt="Book Cover" class="card-image">
-        <div class="detail-buku">
-          <h4><b>Buku Pemrograman</b></h4>
-          <p>HTML, CSS dan JavaScript</p>
-        </div>
-      </div>
-    </div>
+<div class="d-flex justify-content-center">
+  <a class="btn btn-primary" id="book-recommendation">Get Recommendation Book</a>
 </div>
 </div>
 
@@ -82,8 +49,8 @@
   document.getElementById("menu-beranda").classList.remove("active");
   document.getElementById("menu-rekomendasi").classList.add("active");
   document.getElementById("menu-peminjaman").classList.remove("active");
-  // document.getElementById("menu-pengembalian").classList.remove("active");
-  document.getElementById("menu-registrasi").classList.remove("active");
+  document.getElementById("menu-pengembalian").classList.remove("active");
+  // document.getElementById("menu-registrasi").classList.remove("active");
   
   user_name = sessionStorage.getItem("user_name")
   console.log(user_name)
@@ -95,5 +62,11 @@
     document.getElementById("content-recommendation").hidden = false
     document.getElementById("content-warning").hidden = true
   }
+
+  document.addEventListener("DOMContentLoaded",()=>{
+    book_recommendation = document.getElementById("book-recommendation")
+    book_recommendation.href = "/get_recommendation/"+sessionStorage.getItem("user_fingerprint")
+  })
+
 </script>
 {% endblock %}

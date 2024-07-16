@@ -121,13 +121,13 @@ header {
 
 /*sambutan end*/
 /*Tabel untuk menu peminjaman*/
-table, th, td {
+/* table, th, td {
   border: 1px solid white;
   border-collapse: collapse;
 }
 th, td {
   background-color: #96D4D4;
-}
+} */
 
 /*rekomendasi buku*/
 /*card*/

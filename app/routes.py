@@ -129,23 +129,27 @@ def loan():
 
 @main.route('/get_recommendation/<string:fingerprint_id>',methods=["GET"])
 def get_recommendation(fingerprint_id):
-    print(fingerprint_id)
-    student = Student.query.filter_by(fingerprint=fingerprint_id).first()
-    student_id = student.id
-    Loans = db.session.query(Loan.id, Student.name, Student.class_name, Book.ISBN, Book.title, Book.author, Loan.loan_date, Loan.return_date, Loan.is_return).join(Student).join(Book).filter(Loan.student_id == student_id).all()
+    # print(fingerprint_id)
+    try:
+        student = Student.query.filter_by(fingerprint=fingerprint_id).first()
+        student_id = student.id
+        Loans = db.session.query(Loan.id, Student.name, Student.class_name, Book.ISBN, Book.title, Book.author, Loan.loan_date, Loan.return_date, Loan.is_return).join(Student).join(Book).filter(Loan.student_id == student_id).all()
 
-    book_name = []
-    for i in Loans:
-        book_name.append(i[4])
+        book_name = []
+        for i in Loans:
+            book_name.append(i[4])
 
-    data_recommendation = recommendation(book_name[-1])
+        data_recommendation = recommendation(book_name[-1])
 
-    book_name_recommendation = []
-    for i in data_recommendation:
-        book_name_recommendation.append(i[0])
+        book_name_recommendation = []
+        for i in data_recommendation:
+            book_name_recommendation.append(i[0])
 
-    # print(book_name_recommendation)
-    book_recommendation = Book.query.filter(Book.title.in_(book_name_recommendation)).limit(10).all()
+        # print(book_name_recommendation)
+        book_recommendation = Book.query.filter(Book.title.in_(book_name_recommendation)).limit(10).all()
+    except:
+        list_popular_book = pbr_df['Book-Title'].tolist()
+        book_recommendation = Book.query.filter(Book.title.in_(list_popular_book)).limit(10).all()
 
 
     return render_template('rekomendasi_buku_cf.html', books=book_recommendation)
